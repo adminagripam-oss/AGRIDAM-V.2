@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { FormattedNumberInput } from './FormattedNumberInput';
 import { MasterDataKebun, calculateKebunTotals, UserRole } from '@/types/database.types';
 import {
   Sheet,
@@ -146,8 +147,7 @@ export function KebunFormModal({
     }
   };
 
-  const handleNumberChange = (field: keyof MasterDataKebun, rawVal: string) => {
-    const val = rawVal === '' ? 0 : parseFloat(rawVal);
+  const handleNumberChange = (field: keyof MasterDataKebun, val: number) => {
     handleChange(field, isNaN(val) ? 0 : val);
   };
 
@@ -219,11 +219,11 @@ export function KebunFormModal({
             </div>
             <Field>
               <FieldLabel className="text-slate-900">Dikuasai</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.inti_dikuasai} onChange={(e) => handleNumberChange('inti_dikuasai', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.inti_dikuasai} onChange={(val) => handleNumberChange('inti_dikuasai', val)} />
             </Field>
             <Field>
               <FieldLabel className="text-slate-900">Tidak Dikuasai</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.inti_tidak_dikuasai} onChange={(e) => handleNumberChange('inti_tidak_dikuasai', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.inti_tidak_dikuasai} onChange={(val) => handleNumberChange('inti_tidak_dikuasai', val)} />
             </Field>
             
             <div className="col-span-full border-b border-slate-200 pb-1 mb-2 mt-4">
@@ -231,11 +231,11 @@ export function KebunFormModal({
             </div>
             <Field>
               <FieldLabel className="text-slate-900">Dikuasai</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.plasma_dikuasai} onChange={(e) => handleNumberChange('plasma_dikuasai', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.plasma_dikuasai} onChange={(val) => handleNumberChange('plasma_dikuasai', val)} />
             </Field>
             <Field>
               <FieldLabel className="text-slate-900">Tidak Dikuasai</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.plasma_tidak_dikuasai} onChange={(e) => handleNumberChange('plasma_tidak_dikuasai', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.plasma_tidak_dikuasai} onChange={(val) => handleNumberChange('plasma_tidak_dikuasai', val)} />
             </Field>
 
             <div className="col-span-full border-b border-slate-200 pb-1 mb-2 mt-4">
@@ -243,11 +243,11 @@ export function KebunFormModal({
             </div>
             <Field>
               <FieldLabel className="text-slate-900">Dikuasai</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.masyarakat_dikuasai} onChange={(e) => handleNumberChange('masyarakat_dikuasai', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.masyarakat_dikuasai} onChange={(val) => handleNumberChange('masyarakat_dikuasai', val)} />
             </Field>
             <Field>
               <FieldLabel className="text-slate-900">Tidak Dikuasai</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.masyarakat_tidak_dikuasai} onChange={(e) => handleNumberChange('masyarakat_tidak_dikuasai', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.masyarakat_tidak_dikuasai} onChange={(val) => handleNumberChange('masyarakat_tidak_dikuasai', val)} />
             </Field>
 
             <div className="col-span-full border-b border-slate-200 pb-1 mb-2 mt-4">
@@ -255,11 +255,11 @@ export function KebunFormModal({
             </div>
             <Field>
               <FieldLabel className="text-slate-900">Dikuasai</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.tbm_dikuasai} onChange={(e) => handleNumberChange('tbm_dikuasai', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.tbm_dikuasai} onChange={(val) => handleNumberChange('tbm_dikuasai', val)} />
             </Field>
             <Field>
               <FieldLabel className="text-slate-900">Tidak Dikuasai</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.tbm_tidak_dikuasai} onChange={(e) => handleNumberChange('tbm_tidak_dikuasai', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.tbm_tidak_dikuasai} onChange={(val) => handleNumberChange('tbm_tidak_dikuasai', val)} />
             </Field>
           </div>
           <div className="mt-2 text-sm font-bold text-slate-900">
@@ -315,11 +315,11 @@ export function KebunFormModal({
             </div>
             <Field>
               <FieldLabel className="text-slate-900">Luas (Ha)</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.dikelola_inti_luas} onChange={(e) => handleNumberChange('dikelola_inti_luas', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.dikelola_inti_luas} onChange={(val) => handleNumberChange('dikelola_inti_luas', val)} />
             </Field>
             <Field>
               <FieldLabel className="text-slate-900">Jumlah Pokok</FieldLabel>
-              <input type="number" step="1" min="0" className={inputClassName} value={form.dikelola_inti_pokok} onChange={(e) => handleNumberChange('dikelola_inti_pokok', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.dikelola_inti_pokok} onChange={(val) => handleNumberChange('dikelola_inti_pokok', val)} />
             </Field>
 
             <div className="col-span-full border-b border-slate-200 pb-1 mb-2 mt-4">
@@ -327,11 +327,11 @@ export function KebunFormModal({
             </div>
             <Field>
               <FieldLabel className="text-slate-900">Luas (Ha)</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.dikelola_plasma_luas} onChange={(e) => handleNumberChange('dikelola_plasma_luas', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.dikelola_plasma_luas} onChange={(val) => handleNumberChange('dikelola_plasma_luas', val)} />
             </Field>
             <Field>
               <FieldLabel className="text-slate-900">Jumlah Pokok</FieldLabel>
-              <input type="number" step="1" min="0" className={inputClassName} value={form.dikelola_plasma_pokok} onChange={(e) => handleNumberChange('dikelola_plasma_pokok', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.dikelola_plasma_pokok} onChange={(val) => handleNumberChange('dikelola_plasma_pokok', val)} />
             </Field>
 
             <div className="col-span-full border-b border-slate-200 pb-1 mb-2 mt-4">
@@ -339,11 +339,11 @@ export function KebunFormModal({
             </div>
             <Field>
               <FieldLabel className="text-slate-900">Luas (Ha)</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.dikelola_masyarakat_luas} onChange={(e) => handleNumberChange('dikelola_masyarakat_luas', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.dikelola_masyarakat_luas} onChange={(val) => handleNumberChange('dikelola_masyarakat_luas', val)} />
             </Field>
             <Field>
               <FieldLabel className="text-slate-900">Jumlah Pokok</FieldLabel>
-              <input type="number" step="1" min="0" className={inputClassName} value={form.dikelola_masyarakat_pokok} onChange={(e) => handleNumberChange('dikelola_masyarakat_pokok', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.dikelola_masyarakat_pokok} onChange={(val) => handleNumberChange('dikelola_masyarakat_pokok', val)} />
             </Field>
 
             <div className="col-span-full border-b border-slate-200 pb-1 mb-2 mt-4">
@@ -351,11 +351,11 @@ export function KebunFormModal({
             </div>
             <Field>
               <FieldLabel className="text-slate-900">Luas (Ha)</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.dikelola_tbm_luas} onChange={(e) => handleNumberChange('dikelola_tbm_luas', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.dikelola_tbm_luas} onChange={(val) => handleNumberChange('dikelola_tbm_luas', val)} />
             </Field>
             <Field>
               <FieldLabel className="text-slate-900">Jumlah Pokok</FieldLabel>
-              <input type="number" step="1" min="0" className={inputClassName} value={form.dikelola_tbm_pokok} onChange={(e) => handleNumberChange('dikelola_tbm_pokok', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.dikelola_tbm_pokok} onChange={(val) => handleNumberChange('dikelola_tbm_pokok', val)} />
             </Field>
           </div>
         </FieldGroup>
@@ -368,15 +368,15 @@ export function KebunFormModal({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Field>
               <FieldLabel className="text-slate-900 font-medium">Planted Sawit Inti</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.reg_planted_inti} onChange={(e) => handleNumberChange('reg_planted_inti', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.reg_planted_inti} onChange={(val) => handleNumberChange('reg_planted_inti', val)} />
             </Field>
             <Field>
               <FieldLabel className="text-slate-900 font-medium">Planted Sawit Plasma</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.reg_planted_plasma} onChange={(e) => handleNumberChange('reg_planted_plasma', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.reg_planted_plasma} onChange={(val) => handleNumberChange('reg_planted_plasma', val)} />
             </Field>
             <Field>
               <FieldLabel className="text-slate-900 font-medium">Planted Sawit Masyarakat</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.reg_planted_masyarakat} onChange={(e) => handleNumberChange('reg_planted_masyarakat', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.reg_planted_masyarakat} onChange={(val) => handleNumberChange('reg_planted_masyarakat', val)} />
             </Field>
             <Field>
               <FieldLabel className="text-slate-900 font-medium">Total Planted Sawit</FieldLabel>
@@ -388,11 +388,11 @@ export function KebunFormModal({
             </Field>
             <Field>
               <FieldLabel className="text-slate-900 font-medium">TBM</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.reg_tbm} onChange={(e) => handleNumberChange('reg_tbm', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.reg_tbm} onChange={(val) => handleNumberChange('reg_tbm', val)} />
             </Field>
             <Field>
               <FieldLabel className="text-slate-900 font-medium">Areal Lain-lain</FieldLabel>
-              <input type="number" step="0.01" min="0" className={inputClassName} value={form.reg_areal_lain} onChange={(e) => handleNumberChange('reg_areal_lain', e.target.value)} />
+              <FormattedNumberInput className={inputClassName} value={form.reg_areal_lain} onChange={(val) => handleNumberChange('reg_areal_lain', val)} />
             </Field>
           </div>
           <div className="mt-2 text-sm font-bold text-slate-900">
@@ -454,10 +454,10 @@ export function KebunFormModal({
         </div>
         <FieldGroup>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Field><FieldLabel className="text-slate-900">Luas BA Satgas PKH</FieldLabel><input type="number" step="0.01" min="0" className={inputClassName} value={form.luas_ba} onChange={(e) => handleNumberChange('luas_ba', e.target.value)} /></Field>
-            <Field><FieldLabel className="text-slate-900">Luas SHP Awal</FieldLabel><input type="number" step="0.01" min="0" className={inputClassName} value={form.luas_shp_awal} onChange={(e) => handleNumberChange('luas_shp_awal', e.target.value)} /></Field>
-            <Field><FieldLabel className="text-slate-900">HO Planted Sawit Inti</FieldLabel><input type="number" step="0.01" min="0" className={inputClassName} value={form.ho_planted_inti} onChange={(e) => handleNumberChange('ho_planted_inti', e.target.value)} /></Field>
-            <Field><FieldLabel className="text-slate-900">HO Planted Sawit Plasma</FieldLabel><input type="number" step="0.01" min="0" className={inputClassName} value={form.ho_planted_plasma} onChange={(e) => handleNumberChange('ho_planted_plasma', e.target.value)} /></Field>
+            <Field><FieldLabel className="text-slate-900">Luas BA Satgas PKH</FieldLabel><FormattedNumberInput className={inputClassName} value={form.luas_ba} onChange={(val) => handleNumberChange('luas_ba', val)} /></Field>
+            <Field><FieldLabel className="text-slate-900">Luas SHP Awal</FieldLabel><FormattedNumberInput className={inputClassName} value={form.luas_shp_awal} onChange={(val) => handleNumberChange('luas_shp_awal', val)} /></Field>
+            <Field><FieldLabel className="text-slate-900">HO Planted Sawit Inti</FieldLabel><FormattedNumberInput className={inputClassName} value={form.ho_planted_inti} onChange={(val) => handleNumberChange('ho_planted_inti', val)} /></Field>
+            <Field><FieldLabel className="text-slate-900">HO Planted Sawit Plasma</FieldLabel><FormattedNumberInput className={inputClassName} value={form.ho_planted_plasma} onChange={(val) => handleNumberChange('ho_planted_plasma', val)} /></Field>
           </div>
         </FieldGroup>
       </div>

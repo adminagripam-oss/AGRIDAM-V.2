@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { FormattedNumberInput } from '@/components/FormattedNumberInput';
 import { 
   Building, 
   Edit3, 

@@ -36,7 +36,7 @@ export const DEMO_USERS: Record<string, UserProfile> = {
   },
   ho: {
     id: 'user-ho-001',
-    email: 'admin.ho@agridam.co.id',
+    email: 'ADMIN',
     full_name: 'Admin Head Office (Checker Pusat)',
     role: 'ho',
     regional_name: 'Head Office (Jakarta)',
