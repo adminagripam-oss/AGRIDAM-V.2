@@ -20,6 +20,7 @@ export default function HeadOfficeDashboardPage() {
 
   // Form Modal State
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
+  const [toast, setToast] = useState<{message: string, type: 'success' | 'error'} | null>(null);
   const [editingKebun, setEditingKebun] = useState<Partial<MasterDataKebun> | null>(null);
 
   const [reviewRequest, setReviewRequest] = useState<RequestKebun | null>(null);
@@ -65,6 +66,11 @@ export default function HeadOfficeDashboardPage() {
   const myRequestsData = isRegional 
     ? requestsData.filter(r => r.wilayah === currentUser.regional_name) 
     : requestsData.filter(r => r.approval_status === 'PENDING');
+
+  const showToast = (message: string, type: 'success' | 'error' = 'success') => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
+  };
 
   const handleDeleteKebun = async (id: string) => {
     setMasterData((prev) => prev.filter((k) => String((k as any).no) !== id && k.id !== id));
@@ -148,16 +154,30 @@ export default function HeadOfficeDashboardPage() {
         setMasterData(prev => prev.map(m => m.id === formData.id ? { ...m, ...formData } : m));
         if (supabase) {
           try {
-            await supabase.from('master_data_kebun').update(formData).eq('id', formData.id);
-          } catch (e) { console.error('Supabase update error:', e); }
+            const { error } = await supabase.from('master_data_kebun').update(formData).eq('id', formData.id);
+            if (error) throw error;
+            showToast('Berhasil memperbarui data kebun!');
+          } catch (e: any) {
+            console.error('Supabase update error:', e);
+            showToast('Gagal memperbarui data: ' + e.message, 'error');
+          }
+        } else {
+          showToast('Berhasil memperbarui data (Offline mode)');
         }
       } else {
         const newMaster: MasterDataKebun = { ...formData, id: `kebun-${Date.now()}` };
         setMasterData(prev => [newMaster, ...prev]);
         if (supabase) {
           try {
-            await supabase.from('master_data_kebun').insert([formData]);
-          } catch (e) { console.error('Supabase insert error:', e); }
+            const { error } = await supabase.from('master_data_kebun').insert([newMaster]);
+            if (error) throw error;
+            showToast('Berhasil menambahkan data kebun baru!');
+          } catch (e: any) {
+            console.error('Supabase insert error:', e);
+            showToast('Gagal menambahkan data: ' + e.message, 'error');
+          }
+        } else {
+          showToast('Berhasil menambahkan data (Offline mode)');
         }
       }
     }
@@ -176,8 +196,15 @@ export default function HeadOfficeDashboardPage() {
 
     if (supabase) {
       try {
-        await supabase.from('requests_kebun').update({ approval_status: 'APPROVED' }).eq('id', req.id);
-      } catch (e) { console.error('Supabase approve error:', e); }
+        const { error } = await supabase.from('requests_kebun').update({ approval_status: 'APPROVED' }).eq('id', req.id);
+        if (error) throw error;
+        showToast('Berhasil menyetujui (Approve) request!');
+      } catch (e: any) {
+        console.error('Supabase approve error:', e);
+        showToast('Gagal approve: ' + e.message, 'error');
+      }
+    } else {
+      showToast('Berhasil approve (Offline mode)');
     }
   };
 
@@ -188,8 +215,15 @@ export default function HeadOfficeDashboardPage() {
 
     if (supabase) {
       try {
-        await supabase.from('requests_kebun').update({ approval_status: 'REJECTED', rejection_note: reason }).eq('id', id);
-      } catch (e) { console.error('Supabase reject error:', e); }
+        const { error } = await supabase.from('requests_kebun').update({ approval_status: 'REJECTED', rejection_note: reason }).eq('id', id);
+        if (error) throw error;
+        showToast('Berhasil menolak (Reject) request.');
+      } catch (e: any) {
+        console.error('Supabase reject error:', e);
+        showToast('Gagal reject: ' + e.message, 'error');
+      }
+    } else {
+      showToast('Berhasil reject (Offline mode)');
     }
   };
 
@@ -288,6 +322,12 @@ export default function HeadOfficeDashboardPage() {
         userRole={currentUser.role}
         defaultRegionalName={currentUser.regional_name}
       />
+      {/* Toast Notification */}
+      {toast && (
+        <div className={`fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg text-sm font-medium text-white transition-opacity z-50 ${toast.type === 'error' ? 'bg-red-600' : 'bg-emerald-600'}`}>
+          {toast.message}
+        </div>
+      )}
     </div>
   );
 }
