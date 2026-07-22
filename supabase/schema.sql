@@ -87,6 +87,16 @@ CREATE TABLE IF NOT EXISTS public.master_data_kebun (
     provinsi TEXT NOT NULL DEFAULT '-',
     kabupaten TEXT NOT NULL DEFAULT '-',
 
+    -- Blok 5: Planted Dikelola atau Dipanen
+    dikelola_inti_luas NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    dikelola_inti_pokok INT NOT NULL DEFAULT 0,
+    dikelola_plasma_luas NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    dikelola_plasma_pokok INT NOT NULL DEFAULT 0,
+    dikelola_masyarakat_luas NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    dikelola_masyarakat_pokok INT NOT NULL DEFAULT 0,
+    dikelola_tbm_luas NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    dikelola_tbm_pokok INT NOT NULL DEFAULT 0,
+
     created_by UUID REFERENCES public.profiles(id),
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
@@ -163,6 +173,16 @@ CREATE TABLE IF NOT EXISTS public.requests_kebun (
     provinsi TEXT NOT NULL DEFAULT '-',
     kabupaten TEXT NOT NULL DEFAULT '-',
 
+    -- Blok 5: Planted Dikelola atau Dipanen
+    dikelola_inti_luas NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    dikelola_inti_pokok INT NOT NULL DEFAULT 0,
+    dikelola_plasma_luas NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    dikelola_plasma_pokok INT NOT NULL DEFAULT 0,
+    dikelola_masyarakat_luas NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    dikelola_masyarakat_pokok INT NOT NULL DEFAULT 0,
+    dikelola_tbm_luas NUMERIC(12, 2) NOT NULL DEFAULT 0.00,
+    dikelola_tbm_pokok INT NOT NULL DEFAULT 0,
+
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -192,7 +212,7 @@ BEGIN
                 reg_planted_inti, reg_planted_plasma, reg_planted_masyarakat, reg_tbm, reg_areal_lain,
                 inti_dikuasai, inti_tidak_dikuasai, plasma_dikuasai, plasma_tidak_dikuasai,
                 masyarakat_dikuasai, masyarakat_tidak_dikuasai, tbm_dikuasai, tbm_tidak_dikuasai,
-                provinsi, kabupaten, created_by
+                provinsi, kabupaten, dikelola_inti_luas, dikelola_inti_pokok, dikelola_plasma_luas, dikelola_plasma_pokok, dikelola_masyarakat_luas, dikelola_masyarakat_pokok, dikelola_tbm_luas, dikelola_tbm_pokok, created_by
             ) VALUES (
                 NEW.cro, NEW.wilayah, NEW.nama_kebun_pt, NEW.nama_kebun_aktual, NEW.nama_mitra_vendor, NEW.kode_tag_kebun,
                 NEW.keterangan, NEW.tahapan, NEW.status, NEW.penjelasan,
@@ -200,7 +220,7 @@ BEGIN
                 NEW.reg_planted_inti, NEW.reg_planted_plasma, NEW.reg_planted_masyarakat, NEW.reg_tbm, NEW.reg_areal_lain,
                 NEW.inti_dikuasai, NEW.inti_tidak_dikuasai, NEW.plasma_dikuasai, NEW.plasma_tidak_dikuasai,
                 NEW.masyarakat_dikuasai, NEW.masyarakat_tidak_dikuasai, NEW.tbm_dikuasai, NEW.tbm_tidak_dikuasai,
-                NEW.provinsi, NEW.kabupaten, NEW.requested_by
+                NEW.provinsi, NEW.kabupaten, NEW.dikelola_inti_luas, NEW.dikelola_inti_pokok, NEW.dikelola_plasma_luas, NEW.dikelola_plasma_pokok, NEW.dikelola_masyarakat_luas, NEW.dikelola_masyarakat_pokok, NEW.dikelola_tbm_luas, NEW.dikelola_tbm_pokok, NEW.requested_by
             );
         ELSIF NEW.request_type = 'UPDATE' AND NEW.target_kebun_id IS NOT NULL THEN
             UPDATE public.master_data_kebun SET
@@ -236,6 +256,14 @@ BEGIN
                 tbm_tidak_dikuasai = NEW.tbm_tidak_dikuasai,
                 provinsi = NEW.provinsi,
                 kabupaten = NEW.kabupaten,
+                dikelola_inti_luas = NEW.dikelola_inti_luas,
+                dikelola_inti_pokok = NEW.dikelola_inti_pokok,
+                dikelola_plasma_luas = NEW.dikelola_plasma_luas,
+                dikelola_plasma_pokok = NEW.dikelola_plasma_pokok,
+                dikelola_masyarakat_luas = NEW.dikelola_masyarakat_luas,
+                dikelola_masyarakat_pokok = NEW.dikelola_masyarakat_pokok,
+                dikelola_tbm_luas = NEW.dikelola_tbm_luas,
+                dikelola_tbm_pokok = NEW.dikelola_tbm_pokok,
                 updated_at = NOW()
             WHERE id = NEW.target_kebun_id;
         END IF;
