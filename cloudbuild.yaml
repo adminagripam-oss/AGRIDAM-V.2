@@ -46,8 +46,8 @@ substitutions:
   _LOCATION: 'asia-southeast1' # Jakarta / Singapore
   _REPOSITORY: 'agridam-repo'
   _SERVICE_NAME: 'agridam-web'
-  _NEXT_PUBLIC_SUPABASE_URL: ''
-  _NEXT_PUBLIC_SUPABASE_ANON_KEY: ''
+  _NEXT_PUBLIC_SUPABASE_URL: 'https://jwuzwjmqxzhwxnvwyeay.supabase.co'
+  _NEXT_PUBLIC_SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp3dXp3am1xeHpod3hudnd5ZWF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ2ODI3NTQsImV4cCI6MjEwMDI1ODc1NH0.NO6zvTZAvWI-iqXSbbM9Grn3qG_n2RQevmAOakexTag'
 
 options:
   logging: CLOUD_LOGGING_ONLY
