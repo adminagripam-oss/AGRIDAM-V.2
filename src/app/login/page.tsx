@@ -23,7 +23,9 @@ export default function LoginPage() {
     // Find user by email or username (case insensitive)
     const userKey = Object.keys(DEMO_USERS).find((key) => {
       const u = DEMO_USERS[key];
-      return u.email.toLowerCase() === inputUser.toLowerCase();
+      const matchEmail = u.email.toLowerCase() === inputUser.toLowerCase();
+      const matchRegional = u.regional_name?.toLowerCase() === inputUser.toLowerCase();
+      return matchEmail || matchRegional;
     });
 
     if (!userKey) {
@@ -109,13 +111,13 @@ export default function LoginPage() {
             {/* Username */}
             <div className="space-y-1.5">
               <label className="block text-[13px] font-semibold text-slate-700">
-                Email or username
+                Nama Regional atau Username
               </label>
               <input
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Misal: ADMIN atau maker.aceh@agridam.co.id"
+                placeholder="Misal: ADMIN atau Regional Aceh"
                 required
                 className="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-[13px] text-slate-900 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 shadow-sm"
               />
