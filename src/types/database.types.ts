@@ -56,14 +56,14 @@ export interface MasterDataKebun {
   kabupaten: string;
 
   // Blok 5: Planted Dikelola atau Dipanen
-  dikelola_inti_luas: number;
-  dikelola_inti_pokok: number;
-  dikelola_plasma_luas: number;
-  dikelola_plasma_pokok: number;
-  dikelola_masyarakat_luas: number;
-  dikelola_masyarakat_pokok: number;
-  dikelola_tbm_luas: number;
-  dikelola_tbm_pokok: number;
+  dikelola_inti_luas?: number;
+  dikelola_inti_pokok?: number;
+  dikelola_plasma_luas?: number;
+  dikelola_plasma_pokok?: number;
+  dikelola_masyarakat_luas?: number;
+  dikelola_masyarakat_pokok?: number;
+  dikelola_tbm_luas?: number;
+  dikelola_tbm_pokok?: number;
 
   created_by?: string;
   created_at: string;
