@@ -6,9 +6,23 @@
 -- 1. EXTENSIONS & ENUMS
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-CREATE TYPE app_role AS ENUM ('ho', 'regional');
-CREATE TYPE request_type_enum AS ENUM ('CREATE', 'UPDATE');
-CREATE TYPE approval_status_enum AS ENUM ('PENDING', 'APPROVED', 'REJECTED');
+DO $$ BEGIN
+    CREATE TYPE app_role AS ENUM ('ho', 'regional');
+EXCEPTION
+    WHEN duplicate_object THEN NULL;
+END $$;
+
+DO $$ BEGIN
+    CREATE TYPE request_type_enum AS ENUM ('CREATE', 'UPDATE');
+EXCEPTION
+    WHEN duplicate_object THEN NULL;
+END $$;
+
+DO $$ BEGIN
+    CREATE TYPE approval_status_enum AS ENUM ('PENDING', 'APPROVED', 'REJECTED');
+EXCEPTION
+    WHEN duplicate_object THEN NULL;
+END $$;
 
 -- 2. PROFILES TABLE
 CREATE TABLE IF NOT EXISTS public.profiles (
