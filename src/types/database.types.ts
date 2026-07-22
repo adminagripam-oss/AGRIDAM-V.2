@@ -1,4 +1,4 @@
-export type UserRole = 'ho' | 'regional';
+export type UserRole = 'ho' | 'regional' | 'executive';
 
 export type RequestType = 'CREATE' | 'UPDATE';
 

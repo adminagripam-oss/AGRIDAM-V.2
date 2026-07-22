@@ -14,7 +14,11 @@ export default function LoginPage() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     localStorage.setItem('userKey', selectedUserKey);
-    router.push('/head-office/dashboard');
+    if (selectedUserKey === 'exec') {
+      router.push('/executive/dashboard');
+    } else {
+      router.push('/head-office/dashboard');
+    }
   };
 
   return (
@@ -57,6 +61,7 @@ export default function LoginPage() {
                   onChange={(e) => setSelectedUserKey(e.target.value)}
                   className="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-[13px] text-slate-900 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 appearance-none shadow-sm transition-colors cursor-pointer"
                 >
+                  <option value="exec">executive@agridam.co.id (Executive)</option>
                   <option value="ho">admin.ho@agridam.co.id (HO Checker)</option>
                   <optgroup label="Akun Regional Maker (CRO 1 - 11)">
                     {REGIONAL_LIST.map((reg) => (

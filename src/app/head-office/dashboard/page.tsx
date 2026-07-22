@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { MasterDataKebun, RequestKebun } from '@/types/database.types';
 import { INITIAL_MASTER_DATA, INITIAL_REQUESTS, DEMO_USERS } from '@/lib/mock-data';
 import { supabase } from '@/lib/supabaseClient';
+import { exportToCSV } from '@/lib/export-utils';
+import { Download } from 'lucide-react';
 import { DataTable } from '@/components/DataTable';
 import { RequestsTable } from '@/components/RequestsTable';
 import { ApprovalComparisonModal } from '@/components/approval-comparison-modal';
@@ -212,6 +214,14 @@ export default function HeadOfficeDashboardPage() {
             {isRegional ? 'Kelola data kebun dan ajukan pembaruan.' : 'Kelola data kebun dan review pengajuan dari Regional.'}
           </p>
         </div>
+        {!isRegional && (
+          <button
+            onClick={() => exportToCSV(masterData, 'Export_Master_Data_HO')}
+            className="bg-slate-900 text-white px-4 py-2 text-sm font-medium rounded-lg hover:bg-slate-800 transition-colors flex items-center gap-2 shadow-sm"
+          >
+            <Download className="w-4 h-4" /> Export Data (CSV)
+          </button>
+        )}
       </div>
 
       {/* Tabs */}

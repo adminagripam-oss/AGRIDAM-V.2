@@ -26,6 +26,14 @@ export const REGIONAL_LIST = [
 ];
 
 export const DEMO_USERS: Record<string, UserProfile> = {
+  exec: {
+    id: 'user-exec-001',
+    email: 'executive@agridam.co.id',
+    full_name: 'Executive Management',
+    role: 'executive',
+    regional_name: 'Head Office (Jakarta)',
+    cro_name: 'Board of Directors'
+  },
   ho: {
     id: 'user-ho-001',
     email: 'admin.ho@agridam.co.id',
